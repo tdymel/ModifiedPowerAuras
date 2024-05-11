@@ -28,6 +28,7 @@ local GetSpellName = GetSpellName
 local UnitIsFriend = UnitIsFriend
 local UpdateTime, LastUpdate = 0.05, 0
 local path, duration, text, count, time
+local func_table = {}
 
 function MPOWA:OnUpdate(elapsed)
 	LastUpdate = LastUpdate + elapsed
@@ -120,7 +121,11 @@ function MPOWA:OnUpdate(elapsed)
 					end
 
 					if (path["funct"]) then
-						local f = loadstring(path["funct"])
+						local f = func_table[cat]
+						if not f then
+								f = loadstring(path["funct"])
+								func_table[cat] = f
+						end
 						if f ~= nil then
 							if f() and self.frames[cat][1]:IsVisible() then
 								self:FShow(cat)
@@ -196,7 +201,11 @@ function MPOWA:OnUpdate(elapsed)
 					self:FHide(cat)
 				end
 				if (path["funct"]) then
-					local f = loadstring(path["funct"])
+					local f = func_table[cat]
+					if not f then
+							f = loadstring(path["funct"])
+							func_table[cat] = f
+					end
 					if f ~= nil then
 						if f() and self.frames[cat][1]:IsVisible() then
 							self:FShow(cat)
