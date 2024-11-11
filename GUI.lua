@@ -1187,9 +1187,11 @@ function MPOWA:Editbox_Function(obj)
 	if (obj:GetText() ~= nil) then
 		local f = string.gsub(obj:GetText(), "\n", "");
 		if (f ~= "") then
-			self.SAVE[self.CurEdit].funct = f;
+			self.SAVE[self.CurEdit].funct = f
+			self.NeedUpdate[self.CurEdit] = true
 		elseif (f == "") then
 			self.SAVE[self.CurEdit].funct = nil;
+			self.NeedUpdate[self.CurEdit] = false
 		end
 	end
 end

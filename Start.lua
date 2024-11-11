@@ -170,7 +170,8 @@ function MPOWA:Init()
 			end
 			tinsert(self.auras[val["buffname"]], cat)
 			
-			if (val["inverse"] or val["cooldown"]) and val["buffname"] ~= "unitpower" then
+			f = val.funct
+			if (f or val["inverse"] or val["cooldown"]) and val["buffname"] ~= "unitpower" then
 				self.NeedUpdate[cat] = true
 			end
 			
